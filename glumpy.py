@@ -1,13 +1,13 @@
 import os # used to set environment variable
 import numpy as np # THE numpy
 
-##################################################
+#--------------------------------------------------
 # app: application context, windows, input, events
 # gloo: buffers and bridge to the GPU
 # glm: helpers for matrix operations
 # gl: basic gl primitives and functions
 from glumpy import app, gloo, glm, gl
-##################################################
+#--------------------------------------------------
 
 # My Intel graphics chip is psycho with sharing contexts, so ...
 os.environ["PYGLET_SHADOW_WINDOW"] = "0"
@@ -32,6 +32,9 @@ vertex = """
         v_color = color;
         v_position = position;
         v_trans = model * vec4(position,1.0);
+
+        // As matrix multiplication is not commutative
+        // and we now control this our self, the order is important.
         gl_Position = projection * view * model * vec4(position,1.0);
     }
 """
@@ -70,7 +73,7 @@ fragment = """
 window = app.Window(width=512, height=512, color=(1, 1, 1, 1))
 
 #-----------------------------------------------------------------
-# Event listeners
+# Register some rvent listeners
 #
 # on_resize on my windows machine is bugged through pyglet backend
 @window.event
