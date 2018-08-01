@@ -10,9 +10,9 @@ from glumpy import app, gloo, glm, gl
 #--------------------------------------------------
 
 # My Intel graphics chip is psycho with sharing contexts, so ...
-os.environ["PYGLET_SHADOW_WINDOW"] = "0"
-# Had some problem getting glfw backend to work, force pyglet fallback
-app.use("pyglet")
+# os.environ["PYGLET_SHADOW_WINDOW"] = "0"
+# Had some problem getting glfw backend to work, forced pyglet fallback
+# app.use("pyglet")
 
 #----------------------------------------------------------------------
 # Define our shader programs.
